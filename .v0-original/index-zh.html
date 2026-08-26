@@ -1,0 +1,1375 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Lingshui Expats 陵水外籍人士生活指南与资源服务平台原型。"
+    />
+    <title>Lingshui Expats｜陵水外籍人士生活指南</title>
+    <style>
+      :root {
+        --navy: #10104a;
+        --blue: #315bff;
+        --violet: #7c3aed;
+        --pink: #f92f9d;
+        --electric: #00c8ff;
+        --lime: #b8f03a;
+        --gold: #ffd55a;
+        --ink: #151742;
+        --muted: #65708d;
+        --line: #dce2fa;
+        --soft: #f6f7ff;
+        --paper: #fff;
+        --green: #08b9aa;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        color: var(--ink);
+        background: var(--soft);
+        font-family:
+          "PingFang SC", "Microsoft YaHei", Inter, system-ui, sans-serif;
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      .container {
+        width: min(1160px, calc(100% - 40px));
+        margin: auto;
+      }
+      .announcement {
+        background: var(--navy);
+        color: #e8f3ff;
+        font-size: 13px;
+      }
+      .announcement .container {
+        padding: 10px 0;
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        align-items: center;
+      }
+      .announcement strong {
+        color: #fff;
+      }
+      header {
+        background: rgba(255, 255, 255, 0.96);
+        position: sticky;
+        top: 0;
+        z-index: 20;
+        box-shadow: 0 1px 0 rgba(16, 42, 67, 0.08);
+        backdrop-filter: blur(12px);
+      }
+      .nav {
+        min-height: 76px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 24px;
+      }
+      .brand {
+        font-size: 24px;
+        font-weight: 850;
+        color: var(--navy);
+        letter-spacing: -0.8px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        white-space: nowrap;
+      }
+      .brand-mark {
+        width: 36px;
+        height: 36px;
+        border-radius: 12px;
+        background: linear-gradient(
+          135deg,
+          var(--pink),
+          var(--violet) 52%,
+          var(--electric)
+        );
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 8px 18px rgba(124, 58, 237, 0.24);
+      }
+      .brand-mark:after {
+        content: "";
+        position: absolute;
+        width: 43px;
+        height: 43px;
+        border: 3px solid rgba(255, 255, 255, 0.94);
+        border-radius: 50%;
+        left: -17px;
+        bottom: -22px;
+      }
+      .brand-mark:before {
+        content: "✦";
+        position: absolute;
+        right: 5px;
+        top: 3px;
+        color: #fff;
+        font-size: 15px;
+        z-index: 1;
+      }
+      .brand small {
+        display: block;
+        color: var(--pink);
+        font-size: 10px;
+        letter-spacing: 1.4px;
+        margin-top: 2px;
+      }
+      nav {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        font-weight: 650;
+        font-size: 14px;
+        color: #354061;
+      }
+      nav a:hover {
+        color: var(--pink);
+      }
+      .nav-btn,
+      .button {
+        display: inline-flex;
+        border: 0;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        cursor: pointer;
+        border-radius: 99px;
+        font-weight: 800;
+        transition:
+          0.2s transform,
+          0.2s box-shadow;
+      }
+      .nav-btn {
+        padding: 11px 17px;
+        background: linear-gradient(100deg, var(--pink), var(--violet));
+        color: #fff;
+        box-shadow: 0 8px 16px rgba(249, 47, 157, 0.2);
+      }
+      .nav-btn:hover,
+      .button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 11px 22px rgba(124, 58, 237, 0.26);
+      }
+      .menu {
+        display: none;
+        padding: 9px 11px;
+        border: 1px solid var(--line);
+        color: var(--navy);
+        background: #fff;
+        border-radius: 10px;
+        font-size: 18px;
+      }
+      .hero {
+        position: relative;
+        overflow: hidden;
+        background:
+          linear-gradient(
+            112deg,
+            rgba(15, 16, 73, 0.94),
+            rgba(63, 29, 153, 0.76) 52%,
+            rgba(0, 167, 199, 0.48)
+          ),
+          url("https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=1800&q=85")
+            center/cover;
+        color: #fff;
+        min-height: 570px;
+        display: flex;
+        align-items: center;
+      }
+      .hero:after {
+        content: "";
+        position: absolute;
+        width: 610px;
+        height: 610px;
+        border: 1px solid rgba(255, 255, 255, 0.26);
+        border-radius: 50%;
+        right: -155px;
+        top: -285px;
+        box-shadow:
+          0 0 0 36px rgba(0, 200, 255, 0.08),
+          0 0 0 104px rgba(249, 47, 157, 0.06);
+      }
+      .hero:before {
+        content: "LINGSHUI · 海南陵水 · GLOBAL LIFE";
+        position: absolute;
+        right: -34px;
+        bottom: 40px;
+        color: rgba(255, 255, 255, 0.42);
+        font-size: 11px;
+        font-weight: 850;
+        letter-spacing: 3px;
+        transform: rotate(-90deg);
+      }
+      .hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 770px;
+        padding: 82px 0 90px;
+      }
+      .eyebrow {
+        display: inline-flex;
+        padding: 8px 13px;
+        background: linear-gradient(
+          90deg,
+          rgba(0, 200, 255, 0.2),
+          rgba(249, 47, 157, 0.22)
+        );
+        color: #dcffff;
+        border: 1px solid rgba(255, 255, 255, 0.35);
+        border-radius: 99px;
+        letter-spacing: 1.2px;
+        font-size: 11px;
+        font-weight: 850;
+      }
+      h1 {
+        font-size: clamp(42px, 6vw, 72px);
+        line-height: 1.08;
+        margin: 19px 0;
+        letter-spacing: -2.8px;
+        text-shadow: 0 4px 20px rgba(16, 16, 74, 0.2);
+      }
+      .hero p {
+        max-width: 650px;
+        font-size: 19px;
+        line-height: 1.7;
+        color: #f2f5ff;
+        margin: 0 0 28px;
+      }
+      .search-box {
+        padding: 7px;
+        background: rgba(255, 255, 255, 0.98);
+        display: flex;
+        border-radius: 14px;
+        max-width: 660px;
+        box-shadow: 0 16px 42px rgba(14, 9, 61, 0.34);
+      }
+      .search-box input {
+        min-width: 0;
+        flex: 1;
+        border: 0;
+        outline: 0;
+        padding: 13px 15px;
+        color: var(--ink);
+        font-size: 15px;
+      }
+      .search-box button {
+        color: #fff;
+        background: linear-gradient(100deg, var(--pink), var(--violet));
+        border: 0;
+        padding: 0 20px;
+        border-radius: 10px;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      .popular {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+        margin-top: 17px;
+        align-items: center;
+        font-size: 12px;
+        color: #ecedff;
+      }
+      .popular button {
+        border: 1px solid rgba(255, 255, 255, 0.43);
+        border-radius: 99px;
+        background: rgba(255, 255, 255, 0.08);
+        color: #fff;
+        padding: 6px 10px;
+        cursor: pointer;
+      }
+      .popular button:hover {
+        background: #fff;
+        color: var(--violet);
+      }
+      section {
+        padding: 78px 0;
+      }
+      .intro {
+        background: linear-gradient(100deg, #fff, #faf4ff 58%, #e9fcff);
+        padding: 35px 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .intro-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 2.2fr;
+        gap: 35px;
+        align-items: center;
+      }
+      .intro strong {
+        display: block;
+        font-size: 20px;
+        color: var(--violet);
+      }
+      .intro p {
+        color: var(--muted);
+        line-height: 1.75;
+        margin: 0;
+      }
+      .section-head {
+        display: flex;
+        align-items: end;
+        justify-content: space-between;
+        gap: 25px;
+        margin-bottom: 27px;
+      }
+      .section-kicker {
+        color: var(--pink);
+        font-size: 12px;
+        letter-spacing: 1.5px;
+        font-weight: 900;
+        margin: 0 0 8px;
+      }
+      h2 {
+        font-size: 32px;
+        letter-spacing: -1.1px;
+        margin: 0;
+        color: var(--navy);
+      }
+      .section-head > p {
+        margin: 0;
+        color: var(--muted);
+        max-width: 420px;
+        line-height: 1.7;
+      }
+      .resources {
+        background: linear-gradient(180deg, #fff, #fbfbff);
+      }
+      .resource-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 16px;
+      }
+      .resource {
+        position: relative;
+        overflow: hidden;
+        background: linear-gradient(145deg, #fff, #f8f7ff);
+        padding: 23px 20px;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        min-height: 180px;
+        transition: 0.2s;
+        cursor: pointer;
+      }
+      .resource:after {
+        content: "";
+        position: absolute;
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        right: -47px;
+        bottom: -49px;
+        background: linear-gradient(
+          135deg,
+          rgba(124, 58, 237, 0.12),
+          rgba(0, 200, 255, 0.12)
+        );
+      }
+      .resource:hover {
+        transform: translateY(-6px) rotate(-0.35deg);
+        border-color: #b9a4ff;
+        box-shadow: 0 16px 32px rgba(124, 58, 237, 0.14);
+      }
+      .icon {
+        position: relative;
+        z-index: 1;
+        display: grid;
+        place-items: center;
+        width: 46px;
+        height: 46px;
+        background: linear-gradient(135deg, #e2eaff, #ffe6f4);
+        border-radius: 14px;
+        font-size: 21px;
+      }
+      .resource:nth-child(2) .icon {
+        background: linear-gradient(135deg, #d6fff8, #dce5ff);
+      }
+      .resource:nth-child(3) .icon {
+        background: linear-gradient(135deg, #fff5c2, #ffd7ca);
+      }
+      .resource:nth-child(4) .icon {
+        background: linear-gradient(135deg, #ffe1ed, #e5dcff);
+      }
+      .resource:nth-child(5) .icon {
+        background: linear-gradient(135deg, #fff0d6, #ffc4dd);
+      }
+      .resource:nth-child(6) .icon {
+        background: linear-gradient(135deg, #e8ddff, #d6f2ff);
+      }
+      .resource:nth-child(7) .icon {
+        background: linear-gradient(135deg, #d5fbff, #dcffe8);
+      }
+      .resource:nth-child(8) .icon {
+        background: linear-gradient(135deg, #ffe1f0, #f1ddff);
+      }
+      .resource h3 {
+        font-size: 17px;
+        margin: 18px 0 7px;
+        color: var(--navy);
+      }
+      .resource p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .guide-layout {
+        display: grid;
+        grid-template-columns: 1.3fr 0.7fr;
+        gap: 28px;
+      }
+      .guides {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 17px;
+      }
+      .guide-card {
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--line);
+        background: #fff;
+        transition: 0.2s;
+      }
+      .guide-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 28px rgba(49, 91, 255, 0.12);
+      }
+      .guide-image {
+        height: 160px;
+        background: center/cover;
+      }
+      .guide-card:nth-child(1) .guide-image {
+        background-image: url("https://images.unsplash.com/photo-1512100356356-de1b84283e18?auto=format&fit=crop&w=900&q=80");
+      }
+      .guide-card:nth-child(2) .guide-image {
+        background-image: url("https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=900&q=80");
+      }
+      .guide-card:nth-child(3) .guide-image {
+        background-image: url("https://images.unsplash.com/photo-1527529482837-4698179dc6ce?auto=format&fit=crop&w=900&q=80");
+      }
+      .guide-card:nth-child(4) .guide-image {
+        background-image: url("https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80");
+      }
+      .guide-copy {
+        padding: 17px;
+      }
+      .tag {
+        color: var(--pink);
+        font-size: 11px;
+        font-weight: 900;
+        letter-spacing: 1px;
+      }
+      .guide-card h3 {
+        font-size: 17px;
+        line-height: 1.35;
+        margin: 8px 0;
+        color: var(--navy);
+      }
+      .guide-card p {
+        font-size: 13px;
+        margin: 0;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+      .need-help {
+        position: relative;
+        overflow: hidden;
+        padding: 28px;
+        border-radius: 16px;
+        background: linear-gradient(145deg, #7139d5, #f92f9d 56%, #ff775f);
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-shadow: 0 16px 30px rgba(249, 47, 157, 0.22);
+      }
+      .need-help:after {
+        content: "✦";
+        position: absolute;
+        right: 22px;
+        top: 14px;
+        color: rgba(255, 255, 255, 0.38);
+        font-size: 42px;
+      }
+      .need-help h3 {
+        font-size: 27px;
+        margin: 10px 0;
+        letter-spacing: -0.8px;
+      }
+      .need-help p {
+        line-height: 1.65;
+        color: #fff3fa;
+      }
+      .need-help .button {
+        background: #fff;
+        color: var(--violet);
+        padding: 13px 15px;
+        margin-top: 8px;
+      }
+      .featured {
+        background: linear-gradient(110deg, #edf0ff, #fdf0f7 52%, #e7fbff);
+      }
+      .listings {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 17px;
+      }
+      .listing {
+        border: 1px solid rgba(124, 58, 237, 0.15);
+        background: rgba(255, 255, 255, 0.88);
+        border-radius: 16px;
+        padding: 22px;
+      }
+      .listing .list-icon {
+        font-size: 25px;
+        color: var(--pink);
+      }
+      .listing h3 {
+        color: var(--navy);
+        font-size: 18px;
+        margin: 16px 0 7px;
+      }
+      .listing p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+      }
+      .listing a {
+        display: inline-block;
+        color: var(--violet);
+        font-size: 13px;
+        font-weight: 850;
+        margin-top: 6px;
+      }
+      .events-grid {
+        display: grid;
+        grid-template-columns: 0.88fr 1.12fr;
+        gap: 25px;
+      }
+      .event-main {
+        position: relative;
+        overflow: hidden;
+        border-radius: 16px;
+        min-height: 355px;
+        padding: 30px;
+        color: #fff;
+        display: flex;
+        flex-direction: column;
+        justify-content: end;
+        background:
+          linear-gradient(180deg, transparent, rgba(28, 11, 87, 0.91)),
+          url("https://images.unsplash.com/photo-1507504031003-b417219a0fde?auto=format&fit=crop&w=1200&q=80")
+            center/cover;
+      }
+      .event-main:after {
+        content: "GLOBAL MEETS LOCAL";
+        position: absolute;
+        top: 22px;
+        right: -31px;
+        transform: rotate(28deg);
+        color: rgba(255, 255, 255, 0.24);
+        letter-spacing: 2px;
+        font-size: 11px;
+        font-weight: 900;
+      }
+      .event-date {
+        color: #fff4bd;
+        font-size: 13px;
+        font-weight: 850;
+        letter-spacing: 1.1px;
+      }
+      .event-main h3 {
+        font-size: 31px;
+        line-height: 1.17;
+        margin: 10px 0;
+      }
+      .event-main p {
+        color: #eef8ff;
+        margin: 0;
+        line-height: 1.55;
+      }
+      .event-list {
+        background: #fff;
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        overflow: hidden;
+      }
+      .event-row {
+        display: grid;
+        grid-template-columns: 64px 1fr;
+        padding: 18px;
+        gap: 15px;
+        border-bottom: 1px solid var(--line);
+      }
+      .event-row:last-child {
+        border-bottom: none;
+      }
+      .date-block {
+        text-align: center;
+        color: var(--pink);
+        font-weight: 850;
+        line-height: 1;
+      }
+      .date-block span {
+        display: block;
+        font-size: 24px;
+      }
+      .date-block small {
+        font-size: 11px;
+        letter-spacing: 0.8px;
+      }
+      .event-row h3 {
+        font-size: 16px;
+        margin: 0 0 5px;
+        color: var(--navy);
+      }
+      .event-row p {
+        font-size: 13px;
+        margin: 0;
+        color: var(--muted);
+      }
+      .community {
+        position: relative;
+        overflow: hidden;
+        background:
+          radial-gradient(circle at 85% 18%, #315bff 0, transparent 24%),
+          radial-gradient(circle at 15% 88%, #f92f9d 0, transparent 20%),
+          var(--navy);
+        color: #fff;
+      }
+      .community:after {
+        content: "🌍  陵水  ·  国际社区";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 15px;
+        text-align: center;
+        color: rgba(255, 255, 255, 0.1);
+        font-weight: 900;
+        letter-spacing: 6px;
+        font-size: 13px;
+      }
+      .community .section-kicker {
+        color: var(--gold);
+      }
+      .community h2 {
+        color: #fff;
+      }
+      .community .section-head > p {
+        color: #bdd1e1;
+      }
+      .forum-grid {
+        display: grid;
+        grid-template-columns: 1.5fr 0.8fr;
+        gap: 24px;
+      }
+      .topics {
+        background: #fff;
+        border-radius: 13px;
+        overflow: hidden;
+      }
+      .topic {
+        padding: 19px 22px;
+        border-bottom: 1px solid var(--line);
+      }
+      .topic:last-child {
+        border-bottom: 0;
+      }
+      .topic h3 {
+        color: var(--navy);
+        font-size: 16px;
+        margin: 0 0 7px;
+      }
+      .topic p {
+        margin: 0;
+        font-size: 13px;
+        color: var(--muted);
+      }
+      .topic-meta {
+        margin-top: 10px;
+        font-size: 12px;
+        color: #7890a3;
+      }
+      .forum-cta {
+        border-radius: 16px;
+        border: 1px solid rgba(255, 255, 255, 0.28);
+        padding: 28px;
+        background: linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.14),
+          rgba(255, 255, 255, 0.04)
+        );
+      }
+      .forum-cta h3 {
+        font-size: 24px;
+        margin: 0 0 10px;
+      }
+      .forum-cta p {
+        color: #c6d9e8;
+        line-height: 1.65;
+      }
+      .forum-cta .button {
+        background: linear-gradient(100deg, var(--lime), #68f3e1);
+        color: #10205a;
+        padding: 12px 14px;
+        margin-top: 7px;
+      }
+      footer {
+        background: #0b2035;
+        color: #b5c6d5;
+        padding: 48px 0 24px;
+      }
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1.6fr repeat(3, 1fr);
+        gap: 30px;
+        padding-bottom: 36px;
+      }
+      .footer-brand {
+        color: #fff;
+        font-weight: 800;
+        font-size: 21px;
+      }
+      .footer-text {
+        line-height: 1.65;
+        font-size: 13px;
+        max-width: 310px;
+      }
+      .footer-title {
+        color: #fff;
+        font-weight: 750;
+        font-size: 14px;
+        margin-bottom: 12px;
+      }
+      .footer-links a {
+        display: block;
+        margin: 9px 0;
+        font-size: 13px;
+      }
+      .copyright {
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        padding-top: 19px;
+        display: flex;
+        justify-content: space-between;
+        gap: 18px;
+        font-size: 12px;
+      }
+      .modal {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: rgba(3, 20, 35, 0.56);
+        display: none;
+        place-items: center;
+        padding: 20px;
+      }
+      .modal.open {
+        display: grid;
+      }
+      .modal-card {
+        position: relative;
+        width: min(480px, 100%);
+        background: #fff;
+        padding: 32px;
+        border-radius: 15px;
+        box-shadow: 0 20px 65px rgba(0, 0, 0, 0.3);
+      }
+      .modal-card h2 {
+        font-size: 26px;
+      }
+      .modal-card p {
+        color: var(--muted);
+        line-height: 1.65;
+      }
+      .close {
+        position: absolute;
+        top: 13px;
+        right: 16px;
+        border: 0;
+        background: none;
+        font-size: 24px;
+        cursor: pointer;
+        color: var(--muted);
+      }
+      .form-row {
+        margin-top: 14px;
+      }
+      .form-row label {
+        font-size: 13px;
+        font-weight: 750;
+        color: var(--navy);
+        display: block;
+        margin-bottom: 7px;
+      }
+      .form-row input,
+      .form-row select,
+      .form-row textarea {
+        width: 100%;
+        padding: 12px;
+        border: 1px solid #c9d9e6;
+        border-radius: 8px;
+        font: inherit;
+        outline: none;
+      }
+      .form-row textarea {
+        min-height: 82px;
+        resize: vertical;
+      }
+      .submit {
+        background: linear-gradient(100deg, var(--pink), var(--violet));
+        color: #fff;
+        padding: 13px 16px;
+        width: 100%;
+        margin-top: 18px;
+      }
+      .notice {
+        display: none;
+        margin-top: 15px;
+        padding: 12px;
+        background: #e4f8f2;
+        color: #12675d;
+        border-radius: 8px;
+        font-size: 13px;
+      }
+      @media (max-width: 900px) {
+        nav {
+          display: none;
+        }
+        nav.open {
+          display: flex;
+          position: absolute;
+          top: 76px;
+          left: 0;
+          right: 0;
+          padding: 18px 20px;
+          flex-direction: column;
+          align-items: stretch;
+          background: #fff;
+          box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+        }
+        .menu {
+          display: block;
+        }
+        .resource-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .guide-layout,
+        .events-grid,
+        .forum-grid {
+          grid-template-columns: 1fr;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .intro-grid {
+          grid-template-columns: 1fr;
+        }
+        .listings {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+      @media (max-width: 580px) {
+        .container {
+          width: min(100% - 28px, 1160px);
+        }
+        .announcement .container {
+          font-size: 11px;
+        }
+        .announcement span:last-child {
+          display: none;
+        }
+        .hero {
+          min-height: 520px;
+        }
+        .hero-content {
+          padding: 65px 0;
+        }
+        .hero p {
+          font-size: 16px;
+        }
+        .search-box {
+          flex-direction: column;
+          gap: 7px;
+        }
+        .search-box button {
+          padding: 13px;
+        }
+        .resource-grid,
+        .guides,
+        .listings {
+          grid-template-columns: 1fr;
+        }
+        .section-head {
+          align-items: start;
+          flex-direction: column;
+        }
+        .footer-grid {
+          grid-template-columns: 1fr;
+        }
+        .copyright {
+          flex-direction: column;
+        }
+        .intro {
+          padding: 27px 0;
+        }
+        section {
+          padding: 55px 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="announcement">
+      <div class="container">
+        <span
+          ><strong>海南陵水外籍人士生活指南</strong> —
+          服务国际教育园区、国际人才与来陵外籍人士。</span
+        ><span>提供信息指引与资源转介，不替代行政审批。</span>
+      </div>
+    </div>
+    <header>
+      <div class="container nav">
+        <a class="brand" href="#top"
+          ><span class="brand-mark"></span
+          ><span>Lingshui Expats<small>陵水外籍人士生活指南</small></span></a
+        ><button
+          class="menu"
+          aria-label="打开菜单"
+          onclick="document.querySelector('nav').classList.toggle('open')"
+        >
+          ☰
+        </button>
+        <nav>
+          <a href="#guides">生活指南</a><a href="#resources">资源服务</a
+          ><a href="#services">平台服务</a><a href="#events">活动资讯</a
+          ><a href="#community">社区交流</a
+          ><button class="nav-btn" onclick="openModal()">提交服务需求</button>
+        </nav>
+      </div>
+    </header>
+    <main id="top">
+      <section class="hero">
+        <div class="container hero-content">
+          <span class="eyebrow">你的陵水国际生活服务入口</span>
+          <h1>初到陵水，<br />安心生活。</h1>
+          <p>
+            为在陵水工作、学习、旅居的外籍教师、学生、人才及家庭，提供实用生活指南、资源信息和社区连接，帮助更快融入海南的国际教育生活。
+          </p>
+          <div class="search-box">
+            <input
+              id="searchInput"
+              aria-label="搜索资源"
+              placeholder="搜索签证、医疗、住房、学校、活动等资源"
+            /><button onclick="runSearch()">搜索资源</button>
+          </div>
+          <div class="popular">
+            <span>热门搜索：</span
+            ><button onclick="quickSearch('签证居留')">签证居留</button
+            ><button onclick="quickSearch('医疗健康')">医疗健康</button
+            ><button onclick="quickSearch('住房生活')">住房生活</button
+            ><button onclick="quickSearch('就业入职')">就业入职</button>
+          </div>
+        </div>
+      </section>
+      <div class="intro">
+        <div class="container intro-grid">
+          <strong>欢迎来到陵水。</strong>
+          <p>
+            平台围绕国际教育园区和陵水国际化生活场景，连接基础生活信息、服务资源类别和社区活动机会。对工作许可、签证居留、医疗、法律等专业事项，平台提供流程指引、材料清单和合规转介，由有资质机构及责任单位依法办理。
+          </p>
+        </div>
+      </div>
+      <section class="resources" id="resources">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">生活所需，一站指引</p>
+              <h2>陵水基础资源服务</h2>
+            </div>
+            <p>
+              先获取清晰、实用的信息，再对接相应部门、机构或具备资质的服务提供方。
+            </p>
+          </div>
+          <div class="resource-grid">
+            <article class="resource" onclick="showResource('签证居留')">
+              <div class="icon">🛂</div>
+              <h3>签证与居留</h3>
+              <p>提供流程指引、材料清单、期限提醒及合规转介路径。</p>
+            </article>
+            <article class="resource" onclick="showResource('就业入职')">
+              <div class="icon">💼</div>
+              <h3>就业与入职</h3>
+              <p>国际教育岗位、人才服务和外籍人员入职支持信息。</p>
+            </article>
+            <article class="resource" onclick="showResource('活动资讯')">
+              <div class="icon">🌊</div>
+              <h3>活动与体验</h3>
+              <p>校园活动、文化交流、滨海体验和社区聚会资讯。</p>
+            </article>
+            <article class="resource" onclick="showResource('医疗健康')">
+              <div class="icon">⚕️</div>
+              <h3>医疗与健康</h3>
+              <p>就医导航、预约协助转介、保险及紧急信息提示。</p>
+            </article>
+            <article class="resource" onclick="showResource('餐饮生活')">
+              <div class="icon">🍜</div>
+              <h3>餐饮与生活</h3>
+              <p>本地餐饮、国际友好型服务和日常生活推荐入口。</p>
+            </article>
+            <article class="resource" onclick="showResource('法务合规')">
+              <div class="icon">⚖️</div>
+              <h3>法务与合规</h3>
+              <p>劳动、税务、合同等专业事项的合规服务转介。</p>
+            </article>
+            <article class="resource" onclick="showResource('教育培训')">
+              <div class="icon">🎓</div>
+              <h3>教育与培训</h3>
+              <p>语言学习、国际教育、考试服务、技能培训和家庭资源。</p>
+            </article>
+            <article class="resource" onclick="showResource('社区交流')">
+              <div class="icon">🤝</div>
+              <h3>社区与交流</h3>
+              <p>认识国际邻里，交流经验，共同融入陵水本地生活。</p>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section id="guides">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">外籍人士陵水生活指南</p>
+              <h2>让初来生活更轻松</h2>
+            </div>
+            <p>用通俗、实用的内容，回答在陵水工作、学习、居住中的常见问题。</p>
+          </div>
+          <div class="guide-layout">
+            <div class="guides">
+              <article class="guide-card">
+                <div class="guide-image"></div>
+                <div class="guide-copy">
+                  <span class="tag">抵达陵水</span>
+                  <h3>抵达后的前 30 天清单</h3>
+                  <p>住宿、登记、交通、通信支付和日常生活事项的实用指引。</p>
+                </div>
+              </article>
+              <article class="guide-card">
+                <div class="guide-image"></div>
+                <div class="guide-copy">
+                  <span class="tag">日常生活</span>
+                  <h3>在滨海陵水找到生活节奏</h3>
+                  <p>居住片区、购物餐饮、出行和生活服务从哪里开始。</p>
+                </div>
+              </article>
+              <article class="guide-card">
+                <div class="guide-image"></div>
+                <div class="guide-copy">
+                  <span class="tag">社区融入</span>
+                  <h3>如何在陵水认识新朋友</h3>
+                  <p>语言交换、高校活动、志愿服务和本地文化体验推荐。</p>
+                </div>
+              </article>
+              <article class="guide-card">
+                <div class="guide-image"></div>
+                <div class="guide-copy">
+                  <span class="tag">教育服务</span>
+                  <h3>国际教育与能力提升资源</h3>
+                  <p>语言学习、考试服务、技能培训和升学规划信息入口。</p>
+                </div>
+              </article>
+            </div>
+            <aside class="need-help">
+              <span class="eyebrow">刚来到陵水？</span>
+              <h3>不确定从哪里开始？</h3>
+              <p>
+                提交简单需求，我们将为你指向相关指南、责任机构或经核验的服务资源类别。
+              </p>
+              <button class="button" onclick="openModal()">获取指引 →</button>
+            </aside>
+          </div>
+        </div>
+      </section>
+      <section class="featured" id="services">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">平台如何服务</p>
+              <h2>从问题到资源连接</h2>
+            </div>
+            <p>
+              先做好信息公开和资源目录，再以透明的转介和跟进规则回应复杂需求。
+            </p>
+          </div>
+          <div class="listings">
+            <article class="listing">
+              <div class="list-icon">①</div>
+              <h3>查找清晰信息</h3>
+              <p>
+                浏览双语生活指南、常见问答、事项清单和本地生活提示，了解下一步怎么做。
+              </p>
+              <a href="#guides">查看生活指南 →</a>
+            </article>
+            <article class="listing">
+              <div class="list-icon">②</div>
+              <h3>匹配适当资源</h3>
+              <p>按类别查找住房、医疗、翻译、教育和专业服务等资源信息。</p>
+              <a href="#resources">浏览资源目录 →</a>
+            </article>
+            <article class="listing">
+              <div class="list-icon">③</div>
+              <h3>提交并跟进需求</h3>
+              <p>对复杂事项，记录问题、对接服务方并提示后续跟进状态。</p>
+              <a href="#community" onclick="openModal();return false"
+                >提交服务需求 →</a
+              >
+            </article>
+          </div>
+        </div>
+      </section>
+      <section id="events">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">活动与资讯</p>
+              <h2>国际交流与本地体验</h2>
+            </div>
+            <p>
+              国际交流和本地文化参与，能让新的居住地真正成为有归属感的社区。
+            </p>
+          </div>
+          <div class="events-grid">
+            <article class="event-main">
+              <span class="event-date">社区特色活动</span>
+              <h3>国际教育与社区交流会</h3>
+              <p>
+                以开放交流形式，连接教育工作者、学生、创业者与本地合作伙伴。
+              </p>
+            </article>
+            <div class="event-list">
+              <article class="event-row">
+                <div class="date-block"><span>12</span><small>9 月</small></div>
+                <div>
+                  <h3>“初到陵水”迎新说明会</h3>
+                  <p>面向新到外籍教师、学生和家庭的实用问答与生活指引。</p>
+                </div>
+              </article>
+              <article class="event-row">
+                <div class="date-block"><span>19</span><small>9 月</small></div>
+                <div>
+                  <h3>海边语言交换活动</h3>
+                  <p>轻松对话、了解本地文化，结识新的朋友。</p>
+                </div>
+              </article>
+              <article class="event-row">
+                <div class="date-block"><span>26</span><small>9 月</small></div>
+                <div>
+                  <h3>国际人才交流之夜</h3>
+                  <p>分享创意、职业连接和社区中的创新故事。</p>
+                </div>
+              </article>
+              <article class="event-row">
+                <div class="date-block">
+                  <span>03</span><small>10 月</small>
+                </div>
+                <div>
+                  <h3>陵水生活技能工作坊</h3>
+                  <p>介绍日常服务、本地礼仪和实用数字工具。</p>
+                </div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+      <section class="community" id="community">
+        <div class="container">
+          <div class="section-head">
+            <div>
+              <p class="section-kicker">社区话题交流</p>
+              <h2>提问、分享、融入</h2>
+            </div>
+            <p>真实的问题与经验交流，能让本地信息发挥更大的价值。</p>
+          </div>
+          <div class="forum-grid">
+            <div class="topics">
+              <article class="topic">
+                <h3>刚到陵水，优先需要办理哪些生活事项？</h3>
+                <p>抵达登记、交通出行、移动支付、医疗与住宿等常见问题。</p>
+                <div class="topic-meta">迎新指南 · 8 条回复 · 今日更新</div>
+              </article>
+              <article class="topic">
+                <h3>哪里可以参加中文练习和文化体验活动？</h3>
+                <p>社区语言交换、高校活动与日常学习建议。</p>
+                <div class="topic-meta">教育文化 · 5 条回复 · 2 天前</div>
+              </article>
+              <article class="topic">
+                <h3>国际友好型医疗就诊有哪些实用建议？</h3>
+                <p>交流预约准备、就医流程与医疗语言支持经验。</p>
+                <div class="topic-meta">医疗健康 · 12 条回复 · 4 天前</div>
+              </article>
+            </div>
+            <aside class="forum-cta">
+              <h3>从这里开始建立本地连接。</h3>
+              <p>
+                提出问题、发布活动或获取社区资源指引。公开发言请勿发布护照、健康、财务等敏感个人信息。
+              </p>
+              <button class="button" onclick="openModal('community')">
+                加入社区交流 →
+              </button>
+            </aside>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer>
+      <div class="container">
+        <div class="footer-grid">
+          <div>
+            <div class="footer-brand">Lingshui Expats</div>
+            <p class="footer-text">
+              面向海南陵水外籍人士的本地信息与资源连接平台概念原型。
+            </p>
+          </div>
+          <div>
+            <div class="footer-title">快速浏览</div>
+            <div class="footer-links">
+              <a href="#guides">生活指南</a><a href="#resources">资源目录</a
+              ><a href="#events">活动资讯</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-title">平台服务</div>
+            <div class="footer-links">
+              <a href="#services">服务流程</a
+              ><a href="#resources">专业服务转介</a
+              ><a href="#community">社区交流</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-title">重要说明</div>
+            <div class="footer-text">
+              本页面为信息与资源转介平台原型，不提供行政审批、法律意见、医疗诊断或签证获批承诺。
+            </div>
+          </div>
+        </div>
+        <div class="copyright">
+          <span>© 2026 Lingshui Expats · 概念网站</span
+          ><span>为海南陵水的国际生活而设计</span>
+        </div>
+      </div>
+    </footer>
+    <div class="modal" id="modal" aria-hidden="true">
+      <div class="modal-card">
+        <button class="close" onclick="closeModal()">×</button>
+        <h2 id="modalTitle">提交服务需求</h2>
+        <p id="modalText">
+          请说明你的需求。本演示页面不会实际收集或保存信息，仅展示服务入口的交互方式。
+        </p>
+        <form onsubmit="submitRequest(event)">
+          <div class="form-row">
+            <label for="topic">需要哪一类帮助？</label
+            ><select id="topic">
+              <option>签证 / 居留指引</option>
+              <option>就业 / 入职支持</option>
+              <option>医疗健康信息</option>
+              <option>住房 / 本地生活</option>
+              <option>教育 / 语言服务</option>
+              <option>活动 / 社区交流</option>
+              <option>其他事项</option>
+            </select>
+          </div>
+          <div class="form-row">
+            <label for="name">姓名</label
+            ><input id="name" required placeholder="请输入姓名" />
+          </div>
+          <div class="form-row">
+            <label for="message">简要问题</label
+            ><textarea
+              id="message"
+              required
+              placeholder="请避免填写护照、医疗或财务等敏感信息。"
+            ></textarea>
+          </div>
+          <button class="button submit" type="submit">提交需求</button>
+          <div class="notice" id="notice">
+            已完成演示提交。正式平台可在此生成服务工单并提示下一步对接方式。
+          </div>
+        </form>
+      </div>
+    </div>
+    <script>
+      const modal = document.getElementById("modal");
+      function openModal(mode) {
+        document.getElementById("modalTitle").textContent =
+          mode === "community" ? "加入社区交流" : "提交服务需求";
+        document.getElementById("modalText").textContent =
+          mode === "community"
+            ? "可通过此入口建议话题、发起活动或请求社区资源指引。"
+            : "请说明你的需求。本演示页面不会实际收集或保存信息，仅展示服务入口的交互方式。";
+        modal.classList.add("open");
+        modal.setAttribute("aria-hidden", "false");
+        document.getElementById("name").focus();
+      }
+      function closeModal() {
+        modal.classList.remove("open");
+        modal.setAttribute("aria-hidden", "true");
+        document.getElementById("notice").style.display = "none";
+      }
+      function submitRequest(e) {
+        e.preventDefault();
+        document.getElementById("notice").style.display = "block";
+        e.target.reset();
+      }
+      function showResource(name) {
+        openModal();
+        const map = {
+          签证居留: "签证 / 居留指引",
+          就业入职: "就业 / 入职支持",
+          医疗健康: "医疗健康信息",
+          餐饮生活: "住房 / 本地生活",
+          教育培训: "教育 / 语言服务",
+          活动资讯: "活动 / 社区交流",
+          社区交流: "活动 / 社区交流",
+        };
+        document.getElementById("topic").value = map[name] || "其他事项";
+        document.getElementById("modalText").textContent =
+          "你选择了“" +
+          name +
+          "”。可通过此演示入口查看平台如何收集需求，并转至适当的指南或具备资质的服务提供方。";
+      }
+      function runSearch() {
+        const q = document.getElementById("searchInput").value.trim();
+        if (!q) {
+          document.getElementById("searchInput").focus();
+          return;
+        }
+        openModal();
+        document.getElementById("modalTitle").textContent = "搜索：" + q;
+        document.getElementById("modalText").textContent =
+          "正式平台将展示与“" +
+          q +
+          "”相关的生活指南、资源条目和活动资讯；本演示页面将打开服务需求入口。";
+      }
+      function quickSearch(q) {
+        document.getElementById("searchInput").value = q;
+        runSearch();
+      }
+      modal.addEventListener("click", (e) => {
+        if (e.target === modal) closeModal();
+      });
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") closeModal();
+      });
+    </script>
+  </body>
+</html>

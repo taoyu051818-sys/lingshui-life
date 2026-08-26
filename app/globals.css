@@ -36,6 +36,12 @@
   --color-card: var(--card);
   --color-foreground: var(--foreground);
   --color-background: var(--background);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-pink: var(--brand-pink);
+  --color-brand-violet: var(--brand-violet);
+  --color-brand-electric: var(--brand-electric);
+  --color-brand-gold: var(--brand-gold);
+  --color-brand-teal: var(--brand-teal);
   --font-sans: var(--font-noto-sans);
   --font-serif: var(--font-noto-serif);
   --radius-sm: calc(var(--radius) * 0.6);
@@ -49,24 +55,39 @@
 
 :root {
   color-scheme: light;
-  --background: oklch(0.98 0.008 155);
-  --foreground: oklch(0.24 0.025 165);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.24 0.025 165);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.24 0.025 165);
-  --primary: oklch(0.43 0.095 170);
-  --primary-foreground: oklch(0.99 0.005 155);
-  --secondary: oklch(0.94 0.02 155);
-  --secondary-foreground: oklch(0.29 0.045 165);
-  --muted: oklch(0.95 0.012 155);
-  --muted-foreground: oklch(0.5 0.03 165);
-  --accent: oklch(0.76 0.12 75);
-  --accent-foreground: oklch(0.22 0.03 70);
-  --destructive: oklch(0.57 0.2 27);
-  --border: oklch(0.88 0.02 155);
-  --input: oklch(0.88 0.02 155);
-  --ring: oklch(0.52 0.09 170);
+  --background: #f6f7ff;
+  --foreground: #151742;
+  --card: #ffffff;
+  --card-foreground: #151742;
+  --popover: #ffffff;
+  --popover-foreground: #151742;
+  --primary: #315bff;
+  --primary-foreground: #ffffff;
+  --secondary: #eef1ff;
+  --secondary-foreground: #10104a;
+  --muted: #eceffd;
+  --muted-foreground: #62658a;
+  --accent: #b8f03a;
+  --accent-foreground: #10104a;
+  --destructive: #e5484d;
+  --border: #dce2fa;
+  --input: #dce2fa;
+  --ring: #7c3aed;
+  --brand-navy: #10104a;
+  --brand-pink: #f92f9d;
+  --brand-violet: #7c3aed;
+  --brand-electric: #00c8ff;
+  --brand-gold: #ffd55a;
+  --brand-teal: #08b9aa;
+  --navy: #10104a;
+  --blue: #315bff;
+  --violet: #7c3aed;
+  --pink: #f92f9d;
+  --electric: #00c8ff;
+  --lime: #b8f03a;
+  --gold: #ffd55a;
+  --ink: #151742;
+  --soft: #f6f7ff;
   --chart-1: oklch(0.87 0 0);
   --chart-2: oklch(0.556 0 0);
   --chart-3: oklch(0.439 0 0);
@@ -156,10 +177,34 @@
 }
 
 @layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
+  * { @apply border-border outline-ring/50; }
+  body { @apply bg-background text-foreground; font-family: "PingFang SC", "Microsoft YaHei", Inter, system-ui, sans-serif; }
 }
+
+/* Original Lingshui Expats visual system */
+.original-brand-mark { position:relative; display:block; width:36px; height:36px; flex:none; overflow:hidden; border-radius:12px; background:linear-gradient(135deg,var(--pink),var(--violet) 52%,var(--electric)); box-shadow:0 8px 18px rgb(124 58 237 / 24%); }
+.original-brand-mark::after { content:""; position:absolute; width:43px; height:43px; border:3px solid rgb(255 255 255 / 94%); border-radius:50%; left:-17px; bottom:-22px; }
+.original-brand-mark::before { content:"✦"; position:absolute; right:5px; top:3px; color:#fff; font-size:15px; z-index:1; }
+.portal-original section { padding-block: 78px; }
+.portal-original .font-serif { font-family: "PingFang SC", "Microsoft YaHei", Inter, system-ui, sans-serif; }
+.portal-hero { min-height: 570px !important; }
+.portal-hero::after { content: ""; position: absolute; width: 610px; height: 610px; border: 1px solid rgb(255 255 255 / 26%); border-radius: 50%; right: -155px; top: -285px; box-shadow: 0 0 0 36px rgb(0 200 255 / 8%), 0 0 0 104px rgb(249 47 157 / 6%); }
+.portal-hero::before { content: "LINGSHUI · HAINAN · GLOBAL LIFE"; position: absolute; right: -34px; bottom: 40px; color: rgb(255 255 255 / 42%); font-size: 11px; font-weight: 850; letter-spacing: 3px; transform: rotate(-90deg); z-index: 2; }
+.portal-hero h1 { font-size: clamp(42px,6vw,72px); line-height: 1.08; letter-spacing: -2.8px; text-shadow: 0 4px 20px rgb(16 16 74 / 20%); }
+.portal-search { max-width: 660px; padding: 7px; border-radius: 14px; box-shadow: 0 16px 42px rgb(14 9 61 / 34%); }
+.portal-search button { border-radius: 10px; background: linear-gradient(100deg,var(--pink),var(--violet)); padding-inline: 20px; }
+.portal-intro { background: linear-gradient(100deg,#fff,#faf4ff 58%,#e9fcff); }
+.portal-original #resources { max-width: none; background: linear-gradient(180deg,#fff,#fbfbff); }
+.portal-resource { min-height: 180px; border-radius: 16px; background: linear-gradient(145deg,#fff,#f8f7ff); transition: .2s; }
+.portal-resource:hover { transform: translateY(-6px) rotate(-.35deg); border-color: #b9a4ff; box-shadow: 0 16px 32px rgb(124 58 237 / 14%); }
+.portal-guide { border-radius: 16px; box-shadow: none; transition: .2s; }
+.portal-guide:hover { transform: translateY(-5px); box-shadow: 0 15px 28px rgb(49 91 255 / 12%); }
+.portal-help { border-radius: 16px; background: linear-gradient(145deg,#7139d5,#f92f9d 56%,#ff775f); box-shadow: 0 16px 30px rgb(249 47 157 / 22%); }
+.portal-original #services { max-width: none; background: linear-gradient(110deg,#edf0ff,#fdf0f7 52%,#e7fbff); }
+.portal-original #events { background: var(--soft); color: var(--ink); }
+.portal-event-main { min-height: 355px; border-radius: 16px; }
+.portal-community { position: relative; overflow: hidden; max-width: none !important; background: radial-gradient(circle at 85% 18%,#315bff 0,transparent 24%),radial-gradient(circle at 15% 88%,#f92f9d 0,transparent 20%),var(--navy); color: #fff; }
+.portal-community h2 { color: #fff; }
+.portal-community .community-copy { color: #bdd1e1; }
+.portal-community::after { content: "LINGSHUI  ·  INTERNATIONAL COMMUNITY"; position: absolute; inset-inline: 0; bottom: 15px; text-align: center; color: rgb(255 255 255 / 10%); font-weight: 900; letter-spacing: 6px; font-size: 13px; }
+@media (max-width:580px) { .portal-original section { padding-block: 60px; } .portal-hero { min-height: 520px !important; } .portal-hero::before { display:none; } .portal-search { flex-direction:column; align-items:stretch; gap:7px; } .portal-search button { padding:13px; } }
