@@ -16,10 +16,10 @@ const resources = [
   { icon: Handshake, title: '社区与交流', desc: '认识国际邻里，参与本地文化生活。' },
 ]
 const guides = [
-  { tag: '抵达陵水', title: '抵达后的前 30 天清单', desc: '住宿登记、交通、通信支付和日常生活事项。' },
-  { tag: '日常生活', title: '在滨海陵水找到生活节奏', desc: '居住片区、购物餐饮、出行和服务从哪里开始。' },
-  { tag: '社区融入', title: '如何在陵水认识新朋友', desc: '语言交换、高校活动、志愿服务和文化体验。' },
-  { tag: '教育服务', title: '国际教育与能力提升资源', desc: '语言学习、考试服务、技能培训和升学信息。' },
+  { tag: '抵达陵水', title: '抵达后的前 30 天清单', desc: '住宿登记、交通、通信支付和日常生活事项。', image: '/images/guide-arrival.png', alt: '国际居民抵达陵水新居' },
+  { tag: '日常生活', title: '在滨海陵水找到生活节奏', desc: '居住片区、购物餐饮、出行和服务从哪里开始。', image: '/images/guide-daily-life.png', alt: '国际居民体验陵水本地市场' },
+  { tag: '社区融入', title: '如何在陵水认识新朋友', desc: '语言交换、高校活动、志愿服务和文化体验。', image: '/images/guide-community.png', alt: '陵水海边咖啡馆语言交流活动' },
+  { tag: '教育服务', title: '国际教育与能力提升资源', desc: '语言学习、考试服务、技能培训和升学信息。', image: '/images/guide-education.png', alt: '陵水国际教育园区学习环境' },
 ]
 const events = [
   ['12', '9 月', '“初到陵水”迎新说明会'],
@@ -56,7 +56,7 @@ export function PortalHome() {
 
     <section id="guides" className="bg-muted"><div className="mx-auto max-w-6xl px-4 py-20 md:px-6">
       <SectionHead kicker="外籍人士陵水生活指南" title="让初来生活更轻松" desc="用通俗、实用的内容，回答工作、学习和居住中的常见问题。" />
-      <div className="grid gap-6 lg:grid-cols-[1.4fr_.6fr]"><div className="grid gap-4 sm:grid-cols-2">{guides.map((guide, i) => <Link href={`/guides/${i + 1}`} key={guide.title} className="group rounded-2xl border bg-card p-6"><Badge variant="secondary">{guide.tag}</Badge><h3 className="mt-5 text-xl font-semibold text-balance group-hover:text-primary">{guide.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{guide.desc}</p><ArrowRight className="mt-6 size-5 text-primary" /></Link>)}</div><aside className="flex flex-col justify-between rounded-2xl bg-primary p-7 text-primary-foreground"><div className="flex flex-col gap-4"><MapPin className="size-7" /><p className="text-sm font-semibold text-primary-foreground/70">刚来到陵水？</p><h3 className="font-serif text-3xl font-semibold">不确定从哪里开始？</h3><p className="leading-relaxed text-primary-foreground/75">提交简单需求，我们将为你指向相关指南、责任机构或经核验的服务资源。</p></div><Button render={<Link href="/request" />} nativeButton={false} variant="secondary">获取指引 <ArrowRight data-icon="inline-end" /></Button></aside></div>
+      <div className="grid gap-6 lg:grid-cols-[1.4fr_.6fr]"><div className="grid gap-5 sm:grid-cols-2">{guides.map((guide, i) => <Link href={`/guides/${i + 1}`} key={guide.title} className="group overflow-hidden rounded-2xl border bg-card shadow-sm transition-transform hover:-translate-y-1"><div className="relative aspect-[4/3] overflow-hidden"><Image src={guide.image} alt={guide.alt} fill className="object-cover transition-transform duration-500 group-hover:scale-105" sizes="(min-width: 1024px) 32vw, (min-width: 640px) 50vw, 100vw" /><div className="absolute inset-0 bg-gradient-to-t from-foreground/35 to-transparent" /><Badge variant="secondary" className="absolute bottom-4 left-4">{guide.tag}</Badge></div><div className="p-6"><h3 className="text-balance text-xl font-semibold group-hover:text-primary">{guide.title}</h3><p className="mt-3 text-sm leading-relaxed text-muted-foreground">{guide.desc}</p><span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">阅读全文 <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" /></span></div></Link>)}</div><aside className="flex min-h-96 flex-col justify-between rounded-2xl bg-primary p-7 text-primary-foreground"><div className="flex flex-col gap-4"><MapPin className="size-7" /><p className="text-sm font-semibold text-primary-foreground/70">刚来到陵水？</p><h3 className="font-serif text-3xl font-semibold">不确定从哪里开始？</h3><p className="leading-relaxed text-primary-foreground/75">提交简单需求，我们将为你指向相关指南、责任机构或经核验的服务资源。</p></div><Button render={<Link href="/request" />} nativeButton={false} variant="secondary">获取指引 <ArrowRight data-icon="inline-end" /></Button></aside></div>
     </div></section>
 
     <section id="services" className="mx-auto max-w-6xl px-4 py-20 md:px-6"><SectionHead kicker="平台如何服务" title="从问题到资源连接" desc="以清晰的信息、透明的转介和持续跟进回应复杂需求。" /><div className="grid gap-8 md:grid-cols-3">{[['查找清晰信息','浏览双语指南、常见问答和事项清单。'],['匹配适当资源','按类别查找医疗、住房、教育和专业服务。'],['提交并跟进需求','记录复杂问题，并在用户中心查看处理状态。']].map(([title,desc],i)=><article key={title} className="flex flex-col gap-4 border-t-2 border-primary pt-6"><span className="font-serif text-4xl text-primary/45">0{i+1}</span><h3 className="text-xl font-semibold">{title}</h3><p className="leading-relaxed text-muted-foreground">{desc}</p></article>)}</div></section>
