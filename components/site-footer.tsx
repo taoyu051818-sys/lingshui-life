@@ -1,0 +1,1 @@
+export function SiteFooter() { return <footer className="border-t"><div className="mx-auto flex max-w-6xl flex-col gap-3 px-4 py-8 text-sm text-muted-foreground md:flex-row md:items-center md:justify-between md:px-6"><p>陵水外籍人士生活服务平台</p><p>服务信息仅供参考，请以主管部门最新公告为准。</p></div></footer> }
