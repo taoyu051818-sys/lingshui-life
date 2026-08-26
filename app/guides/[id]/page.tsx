@@ -1,6 +1,15 @@
 import Link from 'next/link'
 import { ArrowLeft, Clock3 } from 'lucide-react'
+import { notFound } from 'next/navigation'
 import { SiteHeader } from '@/components/site-header'
 import { Badge } from '@/components/ui/badge'
+import { getContentBySlug } from '@/lib/content'
+import { getLocale } from '@/lib/locale'
 
-export default async function GuidePage({params}:{params:Promise<{id:string}>}){const {id}=await params;return <><SiteHeader/><main className="mx-auto max-w-3xl px-4 py-12 md:px-6"><Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground"><ArrowLeft className="size-4"/>Back to home</Link><div className="mt-8 flex gap-2"><Badge>Service guide</Badge><Badge variant="outline">Guide {id}</Badge></div><h1 className="mt-5 text-balance font-serif text-4xl font-semibold leading-tight">Guide to Work Permits for Foreign Nationals</h1><p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground"><Clock3 className="size-4"/>Updated August 2026</p><article className="mt-10 flex flex-col gap-8 leading-relaxed"><section><h2 className="font-serif text-2xl font-semibold">Who this is for</h2><p className="mt-3 text-muted-foreground">International professionals planning to work legally in Lingshui. Applicants and employers must meet current requirements for foreign nationals working in China.</p></section><section><h2 className="font-serif text-2xl font-semibold">Required documents</h2><ul className="mt-3 list-disc pl-5 text-muted-foreground"><li>Valid passport or international travel document</li><li>Employment contract or proof of appointment</li><li>Highest degree and professional qualification certificates</li><li>Police clearance and health examination certificates</li></ul></section><section><h2 className="font-serif text-2xl font-semibold">Important note</h2><p className="mt-3 text-muted-foreground">Document requirements vary by talent category. Confirm translation, notarization, and authentication requirements before submitting an application.</p></section></article></main></>}
+export default async function GuidePage({ params }: { params: Promise<{ id: string }> }) {
+  const [{ id }, locale] = await Promise.all([params, getLocale()])
+  const guide = await getContentBySlug(id, locale)
+  if (!guide) notFound()
+  const zh = locale === 'zh-CN'
+  return <><SiteHeader locale={locale}/><main className="mx-auto max-w-3xl px-4 py-12 md:px-6"><Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground"><ArrowLeft className="size-4"/>{zh ? '返回首页' : 'Back to home'}</Link><div className="mt-8"><Badge>{zh ? '服务指南' : 'Service guide'}</Badge></div><h1 className="mt-5 text-balance font-serif text-4xl font-semibold leading-tight">{guide.title}</h1><p className="mt-4 flex items-center gap-2 text-sm text-muted-foreground"><Clock3 className="size-4"/>{zh ? '更新于' : 'Updated'} {guide.updatedAt.toLocaleDateString(zh ? 'zh-CN' : 'en-US')}</p><p className="mt-5 text-lg leading-relaxed text-muted-foreground">{guide.summary}</p><article className="mt-10 whitespace-pre-wrap leading-relaxed text-foreground/85">{guide.body}</article></main></>
+}

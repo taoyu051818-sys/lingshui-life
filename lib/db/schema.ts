@@ -34,6 +34,9 @@ export const contentTranslations = pgTable('content_translations', {
 export const serviceRequests = pgTable('service_requests', {
   id: serial('id').primaryKey(), userId: text('userId').notNull(), categoryId: integer('categoryId').notNull(), subject: text('subject').notNull(), description: text('description').notNull(), contact: text('contact').notNull(), status: text('status').notNull().default('submitted'), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),
 })
+export const requestUpdates = pgTable('request_updates', {
+  id: serial('id').primaryKey(), requestId: integer('requestId').notNull(), authorId: text('authorId').notNull(), status: text('status').notNull(), note: text('note').notNull(), createdAt: timestamp('createdAt').notNull().defaultNow(),
+})
 export const userProfiles = pgTable('user_profiles', {
   id: serial('id').primaryKey(), userId: text('userId').notNull().unique(), role: text('role').notNull().default('resident'), preferredLocale: text('preferredLocale').notNull().default('zh'), createdAt: timestamp('createdAt').notNull().defaultNow(), updatedAt: timestamp('updatedAt').notNull().defaultNow(),
 })
