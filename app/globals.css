@@ -42,8 +42,8 @@
   --color-brand-electric: var(--brand-electric);
   --color-brand-gold: var(--brand-gold);
   --color-brand-teal: var(--brand-teal);
-  --font-sans: var(--font-noto-sans);
-  --font-serif: var(--font-noto-serif);
+  --font-sans: var(--font-noto-sans), 'Noto Sans CJK SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-serif: var(--font-noto-serif), 'Noto Serif CJK SC', 'Songti SC', 'STSong', serif;
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
