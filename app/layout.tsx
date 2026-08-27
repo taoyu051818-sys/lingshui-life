@@ -4,8 +4,8 @@ import { Noto_Sans_SC, Noto_Serif_SC } from 'next/font/google'
 import './globals.css'
 import { getLocale } from '@/lib/locale'
 
-const sans = Noto_Sans_SC({ subsets: ['latin'], variable: '--font-noto-sans' })
-const serif = Noto_Serif_SC({ subsets: ['latin'], variable: '--font-noto-serif' })
+const sans = Noto_Sans_SC({ preload: false, variable: '--font-noto-sans' })
+const serif = Noto_Serif_SC({ preload: false, variable: '--font-noto-serif' })
 
 export const metadata: Metadata = { title: { default: 'Lingshui Expats | Living Guide for International Residents', template: '%s | Lingshui Expats' }, description: 'Practical living guides, trusted resources, and community connections for international residents in Lingshui, Hainan.' }
 export const viewport: Viewport = { colorScheme: 'light', themeColor: '#f6f8f5', width: 'device-width', initialScale: 1 }
